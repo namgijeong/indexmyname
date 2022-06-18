@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>포트폴리오</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/portfolio.css" />
+  </head>
+  <body>
+    <div>
+      <section id="wrap">
+        <header><span id="darkMode" class="whiteFont">DARK</span></header>
+        <div id="smallCircle" class="whiteBackground"></div>
+        <div class="fontsize15rem whiteFont bold subject">Hi</div>
+        <div class="fontsize10rem whiteFont bold subject line80">
+          I'M <br />
+          GIJEONG
+        </div>
+        <div id="bigCircle" class="whiteBackground"></div>
+      </section>
+      <section>
+        <div class="whiteFont fontsize5rem centerTextBox10 bold">
+          GIJEONG'S PORTFOLIO
+        </div>
+        <div
+          class="bold fontsize2rem centerTextBox10 whiteBackground"
+          id="aboutme"
+        >
+          ABOUT ME
+        </div>
+        <div>
+          <p class="fontsize2rem whiteFont bold subject">SKILLS</p>
+          <div class="flexAlignStart">
+            <div class="whiteboxWidth whiteBox17rem"></div>
+            <div>
+              <div class="whiteboxWidth whiteBox7rem"></div>
+              <div class="whiteboxWidth whiteBox13rem"></div>
+            </div>
+            <div class="whiteboxWidth whiteBox13rem"></div>
+            <div class="whiteboxWidth whiteBox20rem"></div>
+          </div>
+        </div>
+      </section>
+      <section class="flexCenter">
+        <div id="projectBox" class="whiteBackground flexCenter">PROJECT 01</div>
+        <div></div>
+      </section>
+      <section>
+        <div class="whiteFont fontsize5rem bold subject contact">ContactMe</div>
+        <div class="footer whiteBackground"></div>
+      </section>
+    </div>
+    <script>
+      window.onload = function () {
+        /*최상위 root 속성 셋팅*/
+        document.documentElement.setAttribute("color-theme", "purple");
+      };
+
+      let darkMode = document.getElementById("darkMode");
+
+      darkMode.addEventListener("click", (e) => {
+        //매개변수 이름은 마음대로..e든 event든
+        //e => 이벤트가 일어난 객체가 뭔지 알려줌
+        //e.target==> 일어난 객체를 선택
+        //e.target.innerText=> 일어난 개체를 선택해서 innerText 속성 선택
+        if (e.target.innerText == "DARK") {
+          //documentElement=> html 태그 즉 root
+          document.documentElement.setAttribute("color-theme", "dark");
+          e.target.innerText = "PURPLE";
+        } else {
+          document.documentElement.setAttribute("color-theme", "purple");
+          e.target.innerText = "DARK";
+        }
+      });
+    </script>
+  </body>
+</html>

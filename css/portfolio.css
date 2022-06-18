@@ -1,0 +1,153 @@
+/*가상요소 선택=> :root는 css가 만든거임 
+color-theme는 내장된게 아니라 내가 만든 속성*/
+:root[color-theme="purple"] {
+  /*변수선언*/
+  --background: #66648b;
+  --boxColor: #fff;
+  --fontColor: #222;
+}
+:root[color-theme="dark"] {
+  --background: #000;
+  --boxColor: #2f2f2f;
+  --fontColor: white;
+}
+/*
+자바스크립트로 한다면
+let --background;
+let --boxColor;
+if(root.getAttribute("color-theme")==="pink")
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*
+    스크롤을 다루기 위해서는 관련된 가상 요소에 스타일을 입혀주면 됩니다.
+
+    몇가지 가상요소가 더 있지만 주로 아래 3개만 신경써줍니다.(chrome 기준)
+
+    
+
+    ::-webkit-scrollbar : 스크롤바 전체
+    ::-webkit-scrollbar-thumb : 스크롤 막대
+    ::-webkit-scrollbar-track : 스크롤 막대 외부
+    */
+
+body {
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+header {
+  width: 100%;
+  height: 3rem;
+  text-align: right;
+  padding-top: 1rem;
+  padding-right: 3rem;
+}
+
+header > span {
+  cursor: pointer;
+}
+#wrap > div:nth-child(4) {
+  animation-name: move;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move {
+  0% {
+    left: 0%;
+  }
+  25% {
+    left: 20%;
+  }
+  75% {
+    left: 50%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background);
+}
+
+#smallCircle {
+  position: absolute;
+  width: 32rem;
+  height: 32rem;
+  top: -10rem;
+  left: -10rem;
+  opacity: 0.2;
+  border-radius: 50%;
+}
+
+#bigCircle {
+  position: absolute;
+  width: 46rem;
+  height: 46rem;
+  bottom: -5rem;
+  right: -18rem;
+  opacity: 0.2;
+  border-radius: 50%;
+}
+
+/*
+ 앤트디자인
+ 부트스트랩
+ 머터리얼 디자인
+*/
+
+.flexAlignStart {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.flexAlign {
+  display: flex;
+
+  align-items: center;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flexAlignStart > div {
+  margin-left: 4rem;
+}
+
+.flexAlignStart > div > div {
+  margin-bottom: 1rem;
+}
+
+#projectBox {
+  width: 100%;
+  height: 90vh;
+
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--fontColor);
+}
+
+.contact {
+  height: 70%;
+}
+.footer {
+  height: 30%;
+}
+
+#aboutme {
+  color: var(--fontColor);
+}
