@@ -62,16 +62,16 @@ header > span {
 
 @keyframes move {
   0% {
-    left: 0%;
+    margin-left: 0%;
   }
   25% {
-    left: 20%;
+    margin-left: 20%;
   }
   75% {
-    left: 50%;
+    margin-left: 50%;
   }
   100% {
-    left: 100%;
+    margin-left: 80%;
   }
 }
 
@@ -150,4 +150,30 @@ section {
 
 #aboutme {
   color: var(--fontColor);
+}
+
+.image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#photo1 {
+  background-image: url("../image/5e315429f93ce2161b8ae4c96a2792f0b2fc78f5.png");
+}
+
+#photo2 {
+  background-image: url("../image/다운로드.jpg");
+}
+
+#photo3 {
+  background-image: url("../image/다운로드2.jpg");
+}
+
+#photo4 {
+  background-image: url("../image/Screenshot_2015-07-10-04-49-13.png");
+}
+
+#photo5 {
+  background-image: url("../image/images.jpg");
 }
