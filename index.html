@@ -4,81 +4,1092 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>포트폴리오</title>
-    <link rel="stylesheet" href="./css/common.css" />
-    <link rel="stylesheet" href="./css/portfolio.css" />
+    <title>main</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #top {
+        background-color: black;
+      }
+
+      #topright {
+        margin: 0 auto;
+        width: 1000px;
+
+        display: flex;
+        justify-content: flex-end;
+      }
+      #topright div {
+        color: white;
+
+        margin: 10px;
+        width: 100px;
+      }
+
+      .section1 {
+        margin: 0 auto;
+        width: 1000px;
+
+        /*
+            위에 있는 요소를 position: fixed;를 이용하여 고정하면 왼쪽에 위치합니다.
+            left: 50%;를 추가하여 시작 위치를 정가운데로 만듭니다.
+            transform: translateX( -50% );를 추가하여 요소 크기의 50%만큼 왼쪽을 이동합니다.
+            */
+
+        /*
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+
+        z-index: 1;
+        */
+        background-color: white;
+      }
+
+      .fixedsection1 {
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        z-index: 1;
+      }
+
+      #logosearch {
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+        height: 80px;
+
+        position: relative;
+      }
+      #logo {
+        /*display:inline-block;*/
+        font-weight: bold;
+        font-size: 50px;
+        /*
+            이렇게 해도 글자 원래크기랑 검색창 이미지 원래 크기는 합이 1000을 넘지 않는다.
+            */
+        width: 20%;
+        height: 100%;
+        line-height: 80px;
+        text-align: center;
+      }
+      #search {
+        /*display:inline-block;*/
+        margin-top: 10px;
+        margin-left: 50px;
+        width: 90%;
+        height: 100%;
+      }
+
+      #blank {
+        /*display:inline-block;*/
+        position: relative;
+
+        width: 90%;
+        height: 100%;
+
+        background: url("images\\search_bg.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      #blank > input {
+        position: absolute;
+        top: 10px;
+        left: 30px;
+
+        border: 0px solid black;
+        width: 90%;
+        height: 80%;
+
+        background-color: transparent;
+        color: black;
+        /*onfocus=this.blur();*/
+      }
+      #category {
+        margin-top: 50px;
+
+        display: flex;
+        justify-content: space-around;
+
+        width: 100%;
+        height: 50px;
+      }
+      #category > div > a {
+        text-decoration: none;
+        color: black;
+        /*
+            이거 넣으면 이상하게 됨
+            font-size:100px;
+            */
+      }
+
+      .hiddenmenu {
+        /*
+        display:none와 visibility : hidden은 둘 다 요소를 보이지 않게 하는 속성이라는 점에서 같지만, UI적으로 볼 때 둘은 완전히 다릅니다. display:none은 화면 상 어떤 영역을 차지하지 않고 완전히 삭제된 것처럼 보이게 합니다. 그러나 visibility:hidden은 해당 요소가 보이지 않을 뿐 요소가 존재하는 영역은 확실히 보이게 됩니다.
+        */
+        /*
+        visibility: hidden;
+        */
+        display: none;
+        position: fixed;
+
+        margin: 0 auto;
+
+        width: 1000px;
+
+        background-color: seashell;
+
+        transition: all 1s;
+        opacity: 0;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        /*
+        fixed랑 absolute는 top을 주자
+        */
+        top: 200px;
+      }
+      .hiddenmenu ul {
+        list-style: none;
+        width: 200px;
+        height: 300px;
+      }
+      .hiddenmenu ul li {
+        width: 200px;
+
+        padding: 20px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .fixedhidden {
+        position: fixed;
+
+        top: 23%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        z-index: 1;
+      }
+      .on {
+        /*
+        visibility: visible;
+        */
+        /*
+          block과 flex를 줘서 둘다 먹히게 한다.
+        */
+        display: block;
+        display: flex;
+
+        opacity: 1;
+        height: 300px;
+        z-index: 2;
+      }
+      .hiddenmenu ul li:hover {
+        color: skyblue;
+      }
+
+      /*
+      #category:hover #hiddenmenu {
+        visibility: visible;
+        opacity: 1;
+      }
+      */
+      #section2 {
+        margin: 0 auto;
+        width: 1000px;
+        /*
+            fixed 위치와 겹치지 않게 아랫요소에 마진을 많이 주자.
+            */
+        margin-top: 200px;
+      }
+
+      #section2 > #article1 {
+        text-align: center;
+        font-size: 50px;
+      }
+
+      #article2 {
+        margin-top: 50px;
+        font-size: 50px;
+      }
+      #photogroup1 {
+        margin-top: 50px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        /* overflow-x: scroll;*/
+      }
+      /*
+        #photogruoup1  div{
+            width:400px;
+            height:500px;
+            border-radius:10px;
+            
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:contain;
+
+        }
+        */
+      /*
+        #photogroup1:nth-child(1){
+            background:url("images\\5550m.jpg");
+        }
+        #photogroup1:nth-child(2){
+            background:url("images\\5551w.jpg");
+        }
+        */
+      #main_beforearrow {
+        width: 50px;
+
+        background: url("images\\left-arrow.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        z-index: 0;
+      }
+      #main_afterarrow {
+        width: 50px;
+
+        background: url("images\\arrow-right.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        z-index: 0;
+      }
+      #main_flowdesk {
+        width: 900px;
+        overflow: hidden;
+      }
+      #main_flowdesk > div {
+        width: 900px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+
+        transform: translateX(450px);
+      }
+      #photogroup1_1 {
+        background: url("images\\5550m.jpg");
+        /*flex이므로 min-width를 주자*/
+        min-width: 400px;
+        max-width: 400px;
+        height: 500px;
+        border-radius: 70px;
+
+        margin-right: 50px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      #photogroup1_2 {
+        background: url("images\\5551w.jpg");
+
+        min-width: 400px;
+        max-width: 400px;
+        height: 500px;
+        border-radius: 70px;
+        margin-right: 50px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      #photogroup1_3 {
+        background: url("images\\5579w.jpg");
+
+        min-width: 400px;
+        max-width: 400px;
+        height: 500px;
+        border-radius: 70px;
+        margin-right: 50px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      #photogroup1_4 {
+        background: url("images\\5587m.jpg");
+
+        min-width: 400px;
+        max-width: 400px;
+        height: 500px;
+        border-radius: 70px;
+        margin-right: 50px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      #article3 {
+        margin-top: 50px;
+        font-size: 50px;
+      }
+      .photogroup2 {
+        margin-top: 50px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+      }
+      #photogroup2_1 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        margin-right: 10px;
+      }
+      #photogroup2_2 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup2_3 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup3_1 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup3_2 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup3_3 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup4_1 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup4_2 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup4_3 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup5_1 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup5_2 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+      #photogroup5_3 {
+        background: url("images\\5550m.jpg");
+
+        width: 300px;
+        height: 500px;
+        border-radius: 70px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 10px;
+      }
+
+      #center {
+        left: 300px;
+        right: 300px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+      }
+      #aside1 {
+        width: 200px;
+        height: 600px;
+
+        position: relative;
+        /*
+            위에 있는 요소를 position: fixed;를 이용하여 고정하면 왼쪽에 위치합니다.
+            left: 50%;를 추가하여 시작 위치를 정가운데로 만듭니다.
+            transform: translateX( -50% );를 추가하여 요소 크기의 50%만큼 왼쪽을 이동합니다.
+            */
+
+        position: fixed;
+        left: 0%;
+
+        /*
+            background-color:aqua;
+            */
+      }
+      #aside2 {
+        width: 200px;
+        height: 1000px;
+
+        position: relative;
+        /*
+            위에 있는 요소를 position: fixed;를 이용하여 고정하면 왼쪽에 위치합니다.
+            
+            */
+
+        position: fixed;
+        right: 0%;
+
+        /*
+        원래 height는 긴데 fixed하면 height가 계속 짤리게 나온다. 원래 그림크기 다 보여주면서 fixed 하기 위해
+        top을 음수로 주거나 top-margin을 줄인다.
+        */
+        top: -32%;
+
+        z-index: 3;
+
+        /*
+            background-color:aqua;
+            */
+      }
+
+      #aside1 > div {
+        position: absolute;
+        top: 50%;
+        /*background-color: pink;*/
+
+        width: 250px;
+        height: 300px;
+
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      #aside2 > div {
+        position: absolute;
+        /*
+        aside1 300위치에 맞게 !!
+        */
+        top: 30%;
+        /*background-color: pink;*/
+
+        width: 200px;
+        height: 800px;
+
+        z-index: 3;
+      }
+
+      #beforearrow {
+        width: 20px;
+        height: 20px;
+
+        background: url("images\\left-arrow.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        z-index: 5;
+      }
+      #afterarrow {
+        width: 20px;
+        height: 20px;
+
+        background: url("images\\arrow-right.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        z-index: 5;
+      }
+      #flowdesk {
+        width: 200px;
+        height: 300px;
+        overflow: hidden;
+      }
+      #flowdesk > div {
+        width: 200px;
+        height: 300px;
+
+        display: flex;
+        flex-wrap: nowrap;
+
+        align-items: center;
+
+        /* background: yellow;*/
+        /* 여기다 히든쓰면 안됨.overflow: hidden;*/
+      }
+      #flowdesk > div > div:nth-child(1) {
+        /*
+            display:inline-block;
+            */
+        /*
+        부모 속성열 변갱해도 계속 스트레치가 남아있는 현상이 있네요 저는 min-width를 줘서 강제로 줄어들지 못하게 수정
+        */
+        min-width: 200px;
+        max-width: 200px;
+        height: 300px;
+
+        background: url("images\\1652337351_0.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+
+      #flowdesk > div > div:nth-child(2) {
+        /*
+            display:inline-block;
+            */
+        /*
+        부모 속성열 변갱해도 계속 스트레치가 남아있는 현상이 있네요 저는 min-width를 줘서 강제로 줄어들지 못하게 수정
+        */
+        min-width: 200px;
+        max-width: 200px;
+        height: 300px;
+
+        background: url("images\\1652238048_0.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+
+      #aside2 > div > div:nth-child(1) {
+        width: 200px;
+        height: 100px;
+        background: url("images\\arrow1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      #aside2 > div > div:nth-child(2) {
+        width: 200px;
+        height: 100px;
+        background: url("images\\arrow2.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+
+      #aside2 > div > div:nth-child(3) {
+        width: 200px;
+        height: 500px;
+        border-radius: 20px 20px;
+
+        border-color: black;
+        border-style: solid;
+        border-width: 5px;
+      }
+      #aside2 > div > div > div:nth-child(1) {
+        width: 190px;
+        height: 100px;
+
+        background: url("images\\free-icon-shopping-cart-empty-side-view-34568.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        border-bottom: 5px solid black;
+      }
+      footer {
+        background-color: black;
+
+        /*
+        장바구니를 보이게 하기 위해서 투명도를 주자
+        */
+        opacity: 0.9;
+      }
+      #bottom {
+        text-align: center;
+
+        color: white;
+
+        width: 1600px;
+        margin: 0 auto;
+      }
+
+      #section3 {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+      }
+      #section3 > div {
+        width: 300px;
+      }
+      #first {
+        text-align: center;
+      }
+      #section3 > #first > div > div:nth-child(3) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #kakao {
+        background: url("images\\kakao_icon.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 20px;
+        height: 50px;
+      }
+
+      #kakao + div {
+        text-align: center;
+        line-height: center;
+      }
+      #section3 > #first > div > div:nth-child(4) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #tel {
+        background: url("images\\call.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 20px;
+        height: 50px;
+      }
+      #telandtalk {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #boardinfo {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #section3 > #second > div:nth-child(5) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #section3 > #second > div > div {
+        width: 100px;
+      }
+      #secondphoto1 {
+        background: url("images\\check_ico1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 50px;
+        height: 100px;
+      }
+      #secondphoto2 {
+        background: url("images\\check_ico2.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 50px;
+        height: 100px;
+      }
+      #secondphoto3 {
+        background: url("images\\check_ico3.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 50px;
+        height: 100px;
+      }
+      #third > div:nth-child(2) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #third > div:nth-child(2) > div:nth-child(1) {
+        background: url("images\\kr.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+      #third > div:nth-child(2) > div:nth-child(2) {
+        background: url("images\\jp.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+      #third > div:nth-child(2) > div:nth-child(3) {
+        background: url("images\\us.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+      #third > div:nth-child(2) > div:nth-child(4) {
+        background: url("images\\tw.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      
-      <section id="wrap">
-        <header><span id="darkMode" class="whiteFont">DARK</span></header>
-        <div id="smallCircle" class="whiteBackground"></div>
-        <div class="fontsize15rem whiteFont bold subject">Hi</div>
-        <div class="fontsize10rem whiteFont bold subject line80">
-          I'M <br />
-          GIJEONG
+    <header>
+      <div id="top">
+        <div id="topright">
+          <div>login</div>
+          <div>join</div>
+          <div>event</div>
+          <div><a href="mypage.html">my page</a></div>
         </div>
-        <div id="bigCircle" class="whiteBackground"></div>
-      </section>
-      <section>
-        <div class="whiteFont fontsize5rem centerTextBox10 bold">
-          GIJEONG'S PORTFOLIO
-        </div>
-        <div
-          class="bold fontsize2rem centerTextBox10 whiteBackground"
-          id="aboutme"
-        >
-          오글거리는 로맨스물보다 스릴러물 추천
-        </div>
+      </div>
+    </header>
+
+    <div id="center">
+      <aside id="aside1">
         <div>
-          <p class="fontsize2rem whiteFont bold subject">
-            세상의 쓴맛에 대비하게 해주는 교훈과 감동이 있는 치유 만화물
-          </p>
-          <div class="flexAlignStart">
-            <div id="photo1" class="whiteboxWidth whiteBox17rem image"></div>
+          <div id="beforearrow"></div>
+          <div id="flowdesk">
             <div>
-              <div id="photo2" class="whiteboxWidth whiteBox7rem image"></div>
-              <div id="photo3" class="whiteboxWidth whiteBox13rem image"></div>
+              <!--부모안에 부모가 translate로 움직여야하지않을까.-->
+              <div></div>
+              <div></div>
             </div>
-            <div id="photo4" class="whiteboxWidth whiteBox13rem image"></div>
-            <div id="photo5" class="whiteboxWidth whiteBox20rem image"></div>
+          </div>
+          <div id="afterarrow"></div>
+        </div>
+      </aside>
+
+      <section>
+        <section class="section1">
+          <div id="logosearch">
+            <div id="logo">COWCOW</div>
+            <div id="search">
+              <div id="blank">
+                <input type="text" />
+              </div>
+              <div id="magnify"></div>
+            </div>
+          </div>
+
+          <div id="category">
+            <div><a href="#">TOP</a></div>
+            <div><a href="#">BOTTOM</a></div>
+            <div><a href="#">OUTER</a></div>
+            <div><a href="#">ACCESSORY</a></div>
+          </div>
+          <!--
+          <div id="hiddenmenu">
+            <ul>
+              <div>셔츠</div>
+              <div>맨투맨/후드</div>
+              <div>긴팔티셔츠</div>
+            </ul>
+            <ul>
+              <div>반바지</div>
+              <div>청바지</div>
+              <div>슬랙스</div>
+            </ul>
+            <ul>
+              <div>야상</div>
+              <div>블레이저</div>
+              <div>가디건</div>
+            </ul>
+            <ul>
+              <div>반지</div>
+              <div>모자</div>
+              <div>안경</div>
+            </ul>
+          </div>
+        --></section>
+
+        <section class="hiddenmenu">
+          <ul>
+            <li>셔츠</li>
+            <li>맨투맨/후드</li>
+            <li>긴팔티셔츠</li>
+          </ul>
+          <ul>
+            <li>반바지</li>
+            <li>청바지</li>
+            <li>슬랙스</li>
+          </ul>
+          <ul>
+            <li>야상</li>
+            <li>블레이저</li>
+            <li>가디건</li>
+          </ul>
+          <ul>
+            <li>반지</li>
+            <li>모자</li>
+            <li>안경</li>
+          </ul>
+        </section>
+
+        <section id="section2">
+          <article id="article1">
+            <p>"It's choice — not chance —</p>
+            <p>that determines your destiny."</p>
+            <p>Unique, Unisex select shop "COWCOW"</p>
+          </article>
+          <article id="article2">
+            <p>NEW PRODUCT</p>
+            <div id="photogroup1">
+              <div id="main_beforearrow"></div>
+              <div id="main_flowdesk">
+                <!--부모안에 부모가 translate로 움직여야하지않을까.-->
+                <div>
+                  <div id="photogroup1_1"></div>
+                  <div id="photogroup1_2"></div>
+                  <div id="photogroup1_3"></div>
+                  <div id="photogroup1_4"></div>
+                </div>
+              </div>
+              <div id="main_afterarrow"></div>
+            </div>
+          </article>
+          <article id="article3">
+            <p>BEST PRODUCT</p>
+            <div class="photogroup2">
+              <div id="photogroup2_1"></div>
+              <div id="photogroup2_2"></div>
+              <div id="photogroup2_3"></div>
+            </div>
+            <div class="photogroup2">
+              <div id="photogroup3_1"></div>
+              <div id="photogroup3_2"></div>
+              <div id="photogroup3_3"></div>
+            </div>
+            <div class="photogroup2">
+              <div id="photogroup4_1"></div>
+              <div id="photogroup4_2"></div>
+              <div id="photogroup4_3"></div>
+            </div>
+            <div class="photogroup2">
+              <div id="photogroup5_1"></div>
+              <div id="photogroup5_2"></div>
+              <div id="photogroup5_3"></div>
+            </div>
+          </article>
+        </section>
+
+        <section id="section3">
+          <div id="first">
+            <div>
+              <div>customer center</div>
+              <div>전화보다 빠른 톡 상담!</div>
+              <div>
+                <div id="kakao"></div>
+                <div><p>카카오톡 문의하기</p></div>
+              </div>
+              <div>
+                <div id="tel"></div>
+                <div>####-####</div>
+              </div>
+            </div>
+
+            <div id="telandtalk">
+              <div>
+                <p>전화상담</p>
+                <p>평일 11:00~</p>
+                <p>17:00</p>
+                <p>점심 13:00~14:00</p>
+              </div>
+              <div>
+                <p>톡상담</p>
+                <p>평일 10:00~</p>
+                <p>17:00</p>
+                <p>점심 13:00~14:00</p>
+              </div>
+            </div>
+
+            <div id="board">
+              <div>게시판 상담</div>
+              <div id="boardinfo">
+                <div id="week">
+                  <p>평일</p>
+                  <p>9:00~18:00</p>
+                </div>
+                <div id="lunch">
+                  <p>점심</p>
+                  <p>13:00~14:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="second">
+            <div>
+              <div>NOTICE</div>
+              <div>더보기</div>
+            </div>
+            <hr />
+            <div>
+              <p>전북 정읍/익산 지역 cj 대한통훈 파업 장기화</p>
+              <p>품절 상품 환불 정책 변경 안내</p>
+              <p>2021년 적립금 소멸 안내</p>
+            </div>
+            <hr />
+            <div>
+              <div>
+                <div id="secondphoto1"></div>
+                <div>입금확인</div>
+              </div>
+              <div>
+                <div id="secondphoto2"></div>
+                <div>입고지연</div>
+              </div>
+              <div>
+                <div id="secondphoto3"></div>
+                <div>미확인입금자</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="third">
+            <div>
+              <p>상호:</p>
+              <p>에스엔패션그룹(주)사업장소제지</p>
+              <p>서울특별시 구로구</p>
+              <p>1599-1599</p>
+            </div>
+            <div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <aside id="aside2">
+        <div>
+          <div></div>
+          <div></div>
+          <div>
+            <div></div>
+
+            <div></div>
           </div>
         </div>
-      </section>
-      <section class="flexCenter">
-        <div id="projectBox" class="whiteBackground flexCenter">PROJECT 01</div>
-        <div></div>
-      </section>
-      <section>
-        <div class="whiteFont fontsize5rem bold subject contact">
-          주의: 어린아이들에게 치유물을 틀어주지 마세요.
-        </div>
-        <div class="footer whiteBackground"></div>
-      </section>
+      </aside>
     </div>
-    <script>
-      window.onload = function () {
-        /*최상위 root 속성 셋팅*/
-        document.documentElement.setAttribute("color-theme", "purple");
-      };
 
-      let darkMode = document.getElementById("darkMode");
+    <footer>
+      <div id="bottom">
+        <p>TEL. 070-8623-2653 / E-MAIL cowx2cow@gmail.com</p>
+        <p>개인정보 보호책임자: 김진</p>
+        <p>
+          BUSINESS REG.NO : 612-13-91435 / ONLINE ORDER LICENSE :
+          2019-인천서구-0644 / CEO : 김진
+        </p>
 
-      darkMode.addEventListener("click", (e) => {
-        //매개변수 이름은 마음대로..e든 event든
-        //e => 이벤트가 일어난 객체가 뭔지 알려줌
-        //e.target==> 일어난 객체를 선택
-        //e.target.innerText=> 일어난 개체를 선택해서 innerText 속성 선택
-        if (e.target.innerText == "DARK") {
-          //documentElement=> html 태그 즉 root
-          document.documentElement.setAttribute("color-theme", "dark");
-          e.target.innerText = "PURPLE";
-        } else {
-          document.documentElement.setAttribute("color-theme", "purple");
-          e.target.innerText = "DARK";
-        }
-      });
-    </script>
+        <p>호스팅 업체: 카페24(주)</p>
+        <p>COPYRIGHT (c) cowcow ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+    <script src="main.js"></script>
   </body>
 </html>

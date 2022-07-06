@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mypage</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #top {
+        background-color: black;
+      }
+
+      #topright {
+        margin: 0 auto;
+        width: 1000px;
+
+        display: flex;
+        justify-content: flex-end;
+      }
+      #topright div {
+        color: white;
+
+        margin: 10px;
+        width: 100px;
+      }
+
+      #center {
+        /*
+        hide menu 를 통제하기 위해 여기다가 규격정의
+        */
+        margin: 0 auto;
+        width: 1000px;
+      }
+      .section1 {
+        /*
+        왜 top 50을 주면 해결되는지 질문하자.
+        =>마진을 주면서 해당 구간만큼 여백이 공간을 차지하면서 생긴 오류인 것 같습니다 비슷한 padding으로 주니 top 50px로 주지 않아도 무리 없이 진행되었습니다.
+        추측해본건데 이유는 마진탑을 주었을 때 그위에 형제인 섹션1의 기준으로 마진이 설정될 것입니다. 
+        하지만 세션은 fixed이지만 고정위치가 정해져있지 않으므로 마진이라는 빈 여백이 차지하면서 칸이 밀리게 된 현상 같습니다.
+
+        따라서 고정위치를 정해주고 top에서 50px만큼 떨어지게처럼 확실하게 위치를 잡아주어야 섹션1의 기준으로 마진300px이 먹히게 된 경우 같습니다~
+        */
+        top: 50px;
+        margin: 0 auto;
+        width: 1000px;
+
+        /*
+                위에 있는 요소를 position: fixed;를 이용하여 고정하면 왼쪽에 위치합니다.
+                left: 50%;를 추가하여 시작 위치를 정가운데로 만듭니다.
+                transform: translateX( -50% );를 추가하여 요소 크기의 50%만큼 왼쪽을 이동합니다.
+                */
+        /*
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+
+        z-index: 1;
+        */
+        background-color: white;
+      }
+
+      .fixedsection1 {
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        z-index: 1;
+      }
+
+      #logosearch {
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+        height: 80px;
+
+        position: relative;
+      }
+      #logo {
+        /*display:inline-block;*/
+        font-weight: bold;
+        font-size: 50px;
+        /*
+                이렇게 해도 글자 원래크기랑 검색창 이미지 원래 크기는 합이 1000을 넘지 않는다.
+                */
+        width: 20%;
+        height: 100%;
+        line-height: 80px;
+        text-align: center;
+      }
+      #search {
+        /*display:inline-block;*/
+        margin-top: 10px;
+        margin-left: 50px;
+        width: 90%;
+        height: 100%;
+      }
+      #blank {
+        /*display:inline-block;*/
+        width: 90%;
+        height: 100%;
+
+        background: url("images\\search_bg.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      #category {
+        margin-top: 50px;
+
+        display: flex;
+        justify-content: space-around;
+
+        width: 100%;
+        height: 80px;
+      }
+      #category > div > a {
+        text-decoration: none;
+        color: black;
+        /*
+                이거 넣으면 이상하게 됨
+                font-size:100px;
+                */
+      }
+      .hiddenmenu {
+        /*
+        display:none와 visibility : hidden은 둘 다 요소를 보이지 않게 하는 속성이라는 점에서 같지만, UI적으로 볼 때 둘은 완전히 다릅니다. display:none은 화면 상 어떤 영역을 차지하지 않고 완전히 삭제된 것처럼 보이게 합니다. 그러나 visibility:hidden은 해당 요소가 보이지 않을 뿐 요소가 존재하는 영역은 확실히 보이게 됩니다.
+        */
+        visibility: hidden;
+        /*display: none;*/
+        position: fixed;
+
+        /*
+        하이드메뉴 위치가 통제가 안됨...
+        */
+        margin: 0 auto;
+
+        width: 1000px;
+
+        background-color: seashell;
+
+        transition: all 1s;
+        opacity: 0;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        /*
+        fixed랑 absolute는 top을 주자
+        */
+        top: 200px;
+      }
+      .hiddenmenu ul {
+        list-style: none;
+        width: 200px;
+        height: 300px;
+      }
+      .hiddenmenu ul li {
+        width: 200px;
+
+        padding: 20px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .on {
+        visibility: visible;
+        /*
+          block과 flex를 줘서 둘다 먹히게 한다.
+        */
+        /*display: block;*/
+        display: flex;
+
+        opacity: 1;
+        height: 300px;
+      }
+      .hiddenmenu ul li:hover {
+        color: skyblue;
+      }
+
+      #section2 {
+        margin: 0 auto;
+        width: 1000px;
+
+        /*
+            fixed 위치와 겹치지 않게 아랫요소에 마진을 많이 주자.
+            */
+        margin-top: 100px;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: lightgray;
+      }
+      #section2 > div:nth-child(1) {
+        text-align: center;
+      }
+      #section2 > div:nth-child(1) > div:nth-child(1) {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+
+        background: url("images\\sample.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      #section2 > div:nth-child(2) {
+        text-align: center;
+      }
+      #section2 > div:nth-child(2) > div {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+      }
+      #section2 > div:nth-child(3) {
+        text-align: center;
+        background-color: gray;
+      }
+      #section2 > div:nth-child(3) > div:nth-child(1) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      #section2 > div:nth-child(3) > div:nth-child(1) > div {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+      }
+
+      #section2 > div:nth-child(3) > div:nth-child(2) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      #section2 > div:nth-child(3) > div:nth-child(2) > div {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+      }
+
+      #section3 {
+        margin: 0 auto;
+        width: 1000px;
+
+        margin-top: 50px;
+      }
+      #section3 > div:nth-child(1) {
+        text-align: center;
+        background: lightgray;
+
+        margin-bottom: 10px;
+      }
+      #section3 > div:nth-child(2) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: lightgray;
+      }
+      #section3 > div:nth-child(2) > div {
+        width: 100px;
+        height: 70px;
+        padding: 10px;
+
+        text-align: center;
+      }
+      #section3 > div:nth-child(2) > div:nth-child(5) {
+        background-color: gray;
+      }
+      #section3 > div:nth-child(3) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: lightgray;
+      }
+      #section3 > div:nth-child(3) > div {
+        width: 100px;
+        height: 70px;
+        padding: 10px;
+
+        text-align: center;
+      }
+      #section3 > div:nth-child(3) > div:nth-child(5) {
+        background-color: gray;
+      }
+
+      #section4 {
+        margin-top: 30px;
+
+        margin: 0 auto;
+        width: 1000px;
+      }
+      #section4 > div {
+        margin-top: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: lightpink;
+      }
+      #section4 > div > div {
+        width: 200px;
+        height: 50px;
+        padding: 10px;
+        margin: 10px;
+
+        text-align: center;
+
+        background-color: pink;
+      }
+
+      footer {
+        background-color: black;
+
+        /*
+        장바구니를 보이게 하기 위해서 투명도를 주자
+        */
+        opacity: 0.9;
+      }
+      #bottom {
+        text-align: center;
+
+        color: white;
+
+        width: 1600px;
+        margin: 0 auto;
+      }
+
+      #section5 {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+
+        margin: 0 auto;
+        width: 1000px;
+
+        margin-top: 50px;
+      }
+      #section5 > div {
+        width: 300px;
+      }
+      #first {
+        text-align: center;
+      }
+      #section5 > #first > div > div:nth-child(3) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #kakao {
+        background: url("images\\kakao_icon.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 20px;
+        height: 50px;
+      }
+
+      #kakao + div {
+        text-align: center;
+        line-height: center;
+      }
+      #section5 > #first > div > div:nth-child(4) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #tel {
+        background: url("images\\call.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 20px;
+        height: 50px;
+      }
+      #telandtalk {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #boardinfo {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #section5 > #second > div:nth-child(5) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #section5 > #second > div > div {
+        width: 100px;
+      }
+      #secondphoto1 {
+        background: url("images\\check_ico1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 50px;
+        height: 100px;
+      }
+      #secondphoto2 {
+        background: url("images\\check_ico2.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 50px;
+        height: 100px;
+      }
+      #secondphoto3 {
+        background: url("images\\check_ico3.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 50px;
+        height: 100px;
+      }
+      #third > div:nth-child(2) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+      #third > div:nth-child(2) > div:nth-child(1) {
+        background: url("images\\kr.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+      #third > div:nth-child(2) > div:nth-child(2) {
+        background: url("images\\jp.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+      #third > div:nth-child(2) > div:nth-child(3) {
+        background: url("images\\us.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+      #third > div:nth-child(2) > div:nth-child(4) {
+        background: url("images\\tw.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+        width: 70px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div id="top">
+        <div id="topright">
+          <div>login</div>
+          <div>join</div>
+          <div>event</div>
+          <div>my page</div>
+        </div>
+      </div>
+    </header>
+    <div id="center">
+      <aside id="aside1"></aside>
+      <section>
+        <section class="section1">
+          <div id="logosearch">
+            <div id="logo">COWCOW</div>
+            <div id="search">
+              <div id="blank"></div>
+              <div id="magnify"></div>
+            </div>
+          </div>
+
+          <div id="category">
+            <div><a href="#">TOP</a></div>
+            <div><a href="#">BOTTOM</a></div>
+            <div><a href="#">OUTER</a></div>
+            <div><a href="#">ACCESSORY</a></div>
+          </div>
+        </section>
+
+        <section class="hiddenmenu">
+          <ul>
+            <li>셔츠</li>
+            <li>맨투맨/후드</li>
+            <li>긴팔티셔츠</li>
+          </ul>
+          <ul>
+            <li>반바지</li>
+            <li>청바지</li>
+            <li>슬랙스</li>
+          </ul>
+          <ul>
+            <li>야상</li>
+            <li>블레이저</li>
+            <li>가디건</li>
+          </ul>
+          <ul>
+            <li>반지</li>
+            <li>모자</li>
+            <li>안경</li>
+          </ul>
+        </section>
+
+        <section id="section2">
+          <div>
+            <div></div>
+            <div>프로필 사진</div>
+          </div>
+          <div>
+            <div>회원이름</div>
+            <div>환영합니다</div>
+          </div>
+          <div>
+            <div>
+              <div>적립금</div>
+              <div>예치금</div>
+              <div>할인쿠폰</div>
+            </div>
+            <div>
+              <div>235</div>
+              <div>0</div>
+              <div>4</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section3">
+          <div>
+            <div>나의 주문처리 현황(최근 3개월 기준)</div>
+          </div>
+          <div>
+            <div>입금전</div>
+            <div>배송준비중</div>
+            <div>배송중</div>
+            <div>배송완료</div>
+            <div>
+              <div>취소갯수</div>
+              <div>교환갯수</div>
+              <div>반품갯수</div>
+            </div>
+          </div>
+          <div>
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+            <div>2</div>
+            <div>
+              <div>1</div>
+              <div>2</div>
+              <div>0</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section4">
+          <div>
+            <div>order</div>
+            <div>주문내역조회</div>
+          </div>
+          <div>
+            <div>profile</div>
+            <div>회원정보</div>
+          </div>
+          <div>
+            <div>wishlist</div>
+            <div>관심상품</div>
+          </div>
+          <div>
+            <div>mileage</div>
+            <div>적립금</div>
+          </div>
+          <div>
+            <div>coupon</div>
+            <div>쿠폰</div>
+          </div>
+          <div>
+            <div>board</div>
+            <div>게시물 관리</div>
+          </div>
+          <div>
+            <div>address</div>
+            <div>배송 주소록 관리</div>
+          </div>
+        </section>
+
+        <section id="section5">
+          <div id="first">
+            <div>
+              <div>customer center</div>
+              <div>전화보다 빠른 톡 상담!</div>
+              <div>
+                <div id="kakao"></div>
+                <div><p>카카오톡 문의하기</p></div>
+              </div>
+              <div>
+                <div id="tel"></div>
+                <div>####-####</div>
+              </div>
+            </div>
+
+            <div id="telandtalk">
+              <div>
+                <p>전화상담</p>
+                <p>평일 11:00~</p>
+                <p>17:00</p>
+                <p>점심 13:00~14:00</p>
+              </div>
+              <div>
+                <p>톡상담</p>
+                <p>평일 10:00~</p>
+                <p>17:00</p>
+                <p>점심 13:00~14:00</p>
+              </div>
+            </div>
+
+            <div id="board">
+              <div>게시판 상담</div>
+              <div id="boardinfo">
+                <div id="week">
+                  <p>평일</p>
+                  <p>9:00~18:00</p>
+                </div>
+                <div id="lunch">
+                  <p>점심</p>
+                  <p>13:00~14:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="second">
+            <div>
+              <div>NOTICE</div>
+              <div>더보기</div>
+            </div>
+            <hr />
+            <div>
+              <p>전북 정읍/익산 지역 cj 대한통훈 파업 장기화</p>
+              <p>품절 상품 환불 정책 변경 안내</p>
+              <p>2021년 적립금 소멸 안내</p>
+            </div>
+            <hr />
+            <div>
+              <div>
+                <div id="secondphoto1"></div>
+                <div>입금확인</div>
+              </div>
+              <div>
+                <div id="secondphoto2"></div>
+                <div>입고지연</div>
+              </div>
+              <div>
+                <div id="secondphoto3"></div>
+                <div>미확인입금자</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="third">
+            <div>
+              <p>상호:</p>
+              <p>에스엔패션그룹(주)사업장소제지</p>
+              <p>서울특별시 구로구</p>
+              <p>1599-1599</p>
+            </div>
+            <div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </section>
+      </section>
+      <aside id="aside2"></aside>
+    </div>
+
+    <footer>
+      <div id="bottom">
+        <p>TEL. 070-8623-2653 / E-MAIL cowx2cow@gmail.com</p>
+        <p>개인정보 보호책임자: 김진</p>
+        <p>
+          BUSINESS REG.NO : 612-13-91435 / ONLINE ORDER LICENSE :
+          2019-인천서구-0644 / CEO : 김진
+        </p>
+
+        <p>호스팅 업체: 카페24(주)</p>
+        <p>COPYRIGHT (c) cowcow ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+    <script src="mypage.js"></script>
+  </body>
+</html>
